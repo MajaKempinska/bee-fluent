@@ -1,5 +1,8 @@
 # 🐝 Bee Fluent — platforma do nauki gramatyki angielskiej
 
+> © 2026 Maja Kempińska. Wszystkie prawa zastrzeżone.
+> Kod udostępniony wyłącznie do wglądu w celach rekrutacyjnych i prezentacyjnych.
+
 Interaktywna aplikacja webowa do nauki angielskich czasów gramatycznych,
 z teorią i ćwiczeniami sprawdzanymi w czasie rzeczywistym. Zbudowana jako
 realne narzędzie edukacyjne dla [Bee Fluent with Maja](https://bfwithmaja.com).
@@ -39,3 +42,34 @@ python app.py
 Aplikacja będzie dostępna pod adresem `http://localhost:5001`.
 
 ## 📁 Struktura projektu
+bee-fluent/
+├── app.py                 # Backend Flask — logika i API ćwiczeń
+├── requirements.txt       # Zależności
+├── templates/             # Szablony HTML
+│   ├── home.html          # Strona główna
+│   ├── header.html        # Wspólny nagłówek
+│   ├── index.html         # Lekcja Present Simple
+│   └── present-continuous.html
+└── static/                # Obrazy i zasoby statyczne
+
+## 🗺️ Plany rozwoju
+
+- [ ] Konteneryzacja (Docker)
+- [ ] Testy automatyczne (pytest)
+- [ ] CI/CD (GitHub Actions)
+- [ ] Wdrożenie w chmurze
+- [ ] Kolejne czasy gramatyczne
+
+## 📜 Prawa autorskie
+
+© 2026 Maja Kempińska. Wszystkie prawa zastrzeżone.
+
+Ten projekt — wraz z kodem źródłowym oraz treścią edukacyjną (teoria, ćwiczenia,
+wyjaśnienia gramatyczne) — jest chroniony prawem autorskim i stanowi własność autorki.
+
+Kod został udostępniony publicznie **wyłącznie w celu prezentacji umiejętności**
+(portfolio). Kopiowanie, modyfikowanie, rozpowszechnianie oraz wykorzystywanie
+kodu lub treści — w całości lub w części, w celach komercyjnych lub niekomercyjnych —
+bez wyraźnej pisemnej zgody autorki jest **zabronione**.
+
+W sprawie ewentualnego wykorzystania proszę o kontakt: [bfwithmaja.com](https://bfwithmaja.com)
