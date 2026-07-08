@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bee Fluent with Maja — Ćwicz angielski online</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --gold-deep: #8a6d1f;
+            --gold: #c9a227;
+            --gold-light: #e0bf4a;
+            --cream: #f5ecc8;
+            --ink: #2e2a1a;
+        }
+        body {
+            font-family: -apple-system, system-ui, sans-serif;
+            color: var(--ink);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        .page {
+            background: url('/static/bee1.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .overlay {
+            background: rgba(18, 14, 4, 0.55);
+            padding: 0 20px 60px;
+        }
+
+        .hero { max-width: 720px; margin: 0 auto; text-align: center; padding-top: 40px; }
+        .hero h1 {
+            color: var(--cream); font-size: 44px; line-height: 1.15;
+            margin: 12px 0 6px; font-weight: 800;
+        }
+        .hero h1 em { color: var(--gold-light); font-style: normal; }
+        .hero .tagline {
+            color: var(--gold-light); font-size: 15px; letter-spacing: 3px;
+            text-transform: uppercase; margin-bottom: 18px;
+        }
+        .hero p { color: #efe7cf; font-size: 18px; margin: 0 auto 28px; max-width: 560px; }
+        .cta {
+            display: inline-block; text-decoration: none;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            color: #3a2f0a; font-weight: 700; font-size: 17px;
+            padding: 15px 34px; border-radius: 14px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .cta:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,0.5); }
+
+        .features {
+            max-width: 960px; margin: 56px auto 0;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 18px;
+        }
+        .feature {
+            background: var(--cream); border: 1px solid #d9c87a;
+            border-radius: 18px; padding: 26px 22px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .feature:hover { transform: translateY(-4px); box-shadow: 0 14px 36px rgba(0,0,0,0.4); }
+        .feature .icon {
+            width: 48px; height: 48px; border-radius: 12px;
+            background: linear-gradient(135deg, #1a1608, #3a2f0e);
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 12px;
+        }
+        .feature .icon svg { width: 26px; height: 26px; stroke: var(--gold-light); fill: none; stroke-width: 2; }
+        .feature h3 { color: var(--gold-deep); font-size: 17px; margin: 4px 0 6px; }
+        .feature p { color: #3a3422; font-size: 14px; }
+
+        .lessons { max-width: 960px; margin: 56px auto 0; }
+        .lessons h2 {
+            color: var(--cream); text-align: center; font-size: 28px; margin-bottom: 6px;
+        }
+        .lessons .sub { text-align: center; color: #e6dcb8; margin-bottom: 26px; }
+        .lesson-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 18px;
+        }
+        .lesson-card {
+            background: var(--cream); border: 1px solid #d9c87a;
+            border-radius: 18px; padding: 24px; text-decoration: none;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+            transition: transform 0.2s, box-shadow 0.2s; display: block;
+        }
+        .lesson-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(0,0,0,0.45); }
+        .lesson-card .tag {
+            display: inline-block; background: #ece0b0; color: var(--gold-deep);
+            font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 20px;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .lesson-card h3 { color: var(--ink); font-size: 20px; margin: 12px 0 6px; }
+        .lesson-card p { color: #4a4534; font-size: 14px; }
+        .lesson-card.soon { opacity: 0.7; }
+        .lesson-card.soon:hover { transform: none; box-shadow: 0 8px 30px rgba(0,0,0,0.25); }
+        .lesson-card .arrow { color: var(--gold-deep); font-weight: 700; margin-top: 10px; display: inline-block; transition: transform 0.2s; }
+        .lesson-card:hover .arrow { transform: translateX(4px); }
+
+        .footer { text-align: center; margin-top: 60px; }
+        .footer-logo { height: 90px; width: 90px; border-radius: 50%; object-fit: cover; box-shadow: 0 6px 20px rgba(0,0,0,0.4); transition: transform 0.2s; }
+        .footer-logo:hover { transform: scale(1.08) rotate(-3deg); }
+        .footer p { color: #cabf96; font-size: 14px; margin-top: 12px; }
+        .footer a {
+            font-weight: 700;
+            background: linear-gradient(90deg, #e0bf4a, #f5ecc8);
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+        .footer a:hover { opacity: 0.8; }
+    </style>
+</head>
+<body>
+
+    {% include "header.html" %}
+
+    <div class="page">
+        <div class="overlay">
+
+            <section class="hero">
+                <div class="tagline">Speak your world. Bee you!</div>
+                <h1>Ćwicz angielski <em>online</em>, ucz się bez presji</h1>
+                <p>Interaktywne lekcje gramatyki z teorią i ćwiczeniami — ucz się we własnym tempie i sprawdzaj wiedzę od razu.</p>
+                <a class="cta" href="/present-simple">Rozpocznij naukę →</a>
+            </section>
+
+            <section class="features">
+                <div class="feature">
+                    <div class="icon">
+                        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    </div>
+                    <h3>Mówienie od początku</h3>
+                    <p>Nauka bez blokad i presji — praktyka od pierwszej chwili.</p>
+                </div>
+                <div class="feature">
+                    <div class="icon">
+                        <svg viewBox="0 0 24 24"><path d="M3 8l9-4 9 4-9 4z"/><path d="M6 10v6c0 1.5 9 1.5 9 0v-6"/><path d="M21 8v6"/></svg>
+                    </div>
+                    <h3>Indywidualne podejście</h3>
+                    <p>Lekcje dopasowane do Ciebie, nie do podręcznika.</p>
+                </div>
+                <div class="feature">
+                    <div class="icon">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18"/></svg>
+                    </div>
+                    <h3>Autentyczny angielski</h3>
+                    <p>Oparty na 5 latach życia w Londynie.</p>
+                </div>
+                <div class="feature">
+                    <div class="icon">
+                        <svg viewBox="0 0 24 24"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 1 0-7.1 7.1l1.7 1.7L12 21.5l7.1-7.1l1.7-1.7a5 5 0 0 0 0-7.1z"/></svg>
+                    </div>
+                    <h3>Nauka z przyjemnością</h3>
+                    <p>Bo język to emocje, nie tylko reguły.</p>
+                </div>
+            </section>
+
+            <section class="lessons">
+                <h2>Lekcje gramatyki</h2>
+                <p class="sub">Wybierz temat i zacznij ćwiczyć</p>
+                <div class="lesson-grid">
+                    <a class="lesson-card" href="/present-simple">
+                        <span class="tag">Czasy</span>
+                        <h3>Present Simple</h3>
+                        <p>Rutyna, fakty i stałość — teoria plus ćwiczenia.</p>
+                        <span class="arrow">Zacznij →</span>
+                    </a>
+                    <a class="lesson-card" href="/present-continuous">
+                        <span class="tag">Czasy</span>
+                        <h3>Present Continuous</h3>
+                        <p>Czynności dziejące się teraz i zaplanowana przyszłość.</p>
+                        <span class="arrow">Zacznij →</span>
+                    </a>
+                    <div class="lesson-card soon">
+                        <span class="tag">Wkrótce</span>
+                        <h3>Past Simple</h3>
+                        <p>Przeszłość dokonana. Już niedługo!</p>
+                        <span class="arrow">Wkrótce</span>
+                    </div>
+                </div>
+            </section>
+
+            <div class="footer">
+                <img src="/static/bfwith.jpg" alt="Bee Fluent with Maja" class="footer-logo">
+                <p>Bee Fluent with Maja &nbsp;•&nbsp; <a href="https://bfwithmaja.com" target="_blank">bfwithmaja.com</a></p>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

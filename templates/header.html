@@ -1,0 +1,37 @@
+<style>
+    .header {
+        background: #000;
+        padding: 0 20px;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 16px rgba(0,0,0,0.5);
+    }
+    .nav {
+        max-width: 1100px; margin: 0 auto;
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 12px 0;
+    }
+    .nav-logo { height: 60px; width: auto; display: block; transition: transform 0.2s; }
+    .nav-logo:hover { transform: scale(1.05); }
+    .nav-links a {
+        text-decoration: none; margin-left: 24px; font-size: 15px; font-weight: 700;
+        background: linear-gradient(90deg, #e0bf4a, #f5ecc8, #c9a227);
+        -webkit-background-clip: text; background-clip: text;
+        -webkit-text-fill-color: transparent;
+        transition: opacity 0.2s, transform 0.2s;
+        display: inline-block;
+    }
+    .nav-links a:hover { transform: translateY(-2px); opacity: 0.8; }
+</style>
+
+<header class="header">
+    <nav class="nav">
+        <a href="/"><img src="/static/logonapis.jpg" alt="Bee Fluent with Maja" class="nav-logo"></a>
+        <div class="nav-links">
+            <a href="/">Start</a>
+            <a href="/present-simple">Lekcje</a>
+            <a href="https://bfwithmaja.com/kontakt/" target="_blank">Kontakt</a>
+        </div>
+    </nav>
+</header>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Present Simple</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, system-ui, sans-serif;
+            background: url('/static/bee1.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #2e2a1a;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        .container { max-width: 640px; margin: 0 auto; padding: 40px 20px; }
+        .lesson {
+            background: #f5ecc8;
+            border: 1px solid #d9c87a;
+            border-radius: 20px;
+            padding: 36px;
+            margin-bottom: 28px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+        }
+        h1 {
+            font-size: 30px;
+            margin-bottom: 8px;
+            color: #8a6d1f;
+        }
+        h2 {
+            font-size: 18px;
+            margin: 24px 0 10px;
+            color: #9a7d2a;
+            border-bottom: 1px solid #d9c87a;
+            padding-bottom: 6px;
+        }
+        p { margin-bottom: 12px; color: #3a3422; }
+        .formula {
+            background: #ece0b0;
+            border-left: 3px solid #b5942f;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin: 12px 0;
+            font-weight: 600;
+            color: #4a3d12;
+        }
+        .tip {
+            background: #f7e4a8;
+            border-left: 3px solid #d8a92a;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin: 12px 0;
+            font-size: 15px;
+            color: #5a4510;
+        }
+        .example {
+            background: #e8dcab;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin: 8px 0;
+            font-style: italic;
+            color: #3a3422;
+        }
+        .example b { color: #3f7d3a; font-style: normal; }
+
+        /* ĆWICZENIA */
+        .card {
+            background: #f5ecc8;
+            border: 1px solid #d9c87a;
+            border-radius: 20px;
+            padding: 36px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+        }
+        .card h1 { font-size: 22px; text-align: center; }
+        .progress { text-align: center; color: #7a6c3a; font-size: 14px; margin-bottom: 20px; }
+        .question { font-size: 18px; margin-bottom: 12px; color: #2e2a1a; }
+        .hint { font-size: 13px; color: #8a6d1f; margin-bottom: 14px; font-style: italic; }
+        .option {
+            display: block; width: 100%; text-align: left;
+            padding: 14px 18px; margin-bottom: 10px;
+            border-radius: 12px; border: 1px solid #d9c87a;
+            background: #ece0b0; color: #3a3422;
+            font-size: 15px; cursor: pointer; transition: background 0.15s;
+        }
+        .option:hover { background: #e2d39a; }
+        .option.correct { background: #bfe3b8; border-color: #5aa84e; color: #1f4a1a; }
+        .option.wrong { background: #f0c2c2; border-color: #d65a5a; color: #6a1a1a; }
+        input[type="text"] {
+            width: 100%; padding: 14px 18px; border-radius: 12px;
+            border: 1px solid #d9c87a;
+            background: #fffdf2; color: #2e2a1a;
+            font-size: 15px; margin-bottom: 12px;
+        }
+        input[type="text"]:focus { outline: none; border-color: #b5942f; }
+        .btn {
+            width: 100%; padding: 14px; border: none; border-radius: 12px;
+            background: linear-gradient(90deg, #c9a227, #e0bf4a);
+            color: #3a2f0a; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 8px;
+        }
+        .feedback { text-align: center; margin-top: 16px; font-size: 15px; min-height: 22px; }
+        .feedback.ok { color: #3f7d3a; }
+        .feedback.no { color: #c23a3a; }
+        .explanation {
+            background: #fff8e0;
+            border-left: 3px solid #b5942f;
+            padding: 14px 16px;
+            border-radius: 8px;
+            margin-top: 16px;
+            font-size: 14px;
+            color: #4a3d12;
+            display: none;
+        }
+        .next-btn {
+            width: 100%; padding: 12px; border: none; border-radius: 12px;
+            background: #8a6d1f; color: #fff;
+            font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 16px;
+            display: none;
+        }
+        .final { text-align: center; }
+        .final .score { font-size: 52px; font-weight: 700; margin: 16px 0; color: #8a6d1f; }
+    </style>
+</head>
+<body>
+
+    {% include "header.html" %}
+
+    <div class="container">
+
+        <!-- TEORIA -->
+        <div class="lesson">
+            <h1>Present Simple</h1>
+            <p>Używamy, kiedy mówimy o <b>rutynie</b> (czymś, co się powtarza) lub o <b>faktach ogólnych</b> — życiowych i przyrodniczych.</p>
+            <p>Dotyczy też wszelkiej <b>stałości</b>: plany lotów, rozkłady jazdy, harmonogramy, święta, instrukcje czy schematyczne komentarze sportowe.</p>
+
+            <h2>Przysłówki częstotliwości</h2>
+            <p>Często towarzyszą temu czasowi: <b>always</b> (zawsze), <b>usually</b> (zwykle), <b>often</b> (często), <b>sometimes</b> (czasami), <b>rarely</b> (rzadko), <b>never</b> (nigdy).</p>
+            <div class="tip">⚠️ Stoją zwykle <b>przed czasownikiem głównym</b>, ale <b>po</b> czasowniku „to be”.</div>
+            <div class="example"><b>I always drink</b> coffee. &nbsp;/&nbsp; <b>She is never</b> late.</div>
+
+            <h2>Budowa — zdanie twierdzące</h2>
+            <div class="formula">OSOBA + CZASOWNIK W 1. FORMIE</div>
+            <div class="tip">⚠️ W 3. os. l. poj. (<b>he / she / it</b>) do czasownika dodajemy <b>„-s”</b>.</div>
+            <div class="example"><b>She swims</b> every day.</div>
+
+            <h2>Pytania</h2>
+            <div class="formula">DO / DOES + OSOBA + CZASOWNIK W 1. FORMIE?</div>
+            <p><b>Does</b> → he / she / it &nbsp;•&nbsp; <b>Do</b> → reszta osób</p>
+            <div class="tip">⚠️ <b>DOES</b> „zjada” końcówkę <b>-s</b>!</div>
+            <div class="example">She swims every day. → <b>Does she swim</b> every day?</div>
+
+            <h2>Przeczenia</h2>
+            <div class="formula">OSOBA + DON'T / DOESN'T + CZASOWNIK W 1. FORMIE</div>
+            <div class="tip">⚠️ <b>DOESN'T</b> też „zjada” końcówkę <b>-s</b>!</div>
+            <div class="example">He plays football. → He <b>doesn't play</b> football.</div>
+
+            <h2>Czasowniki statyczne (stative verbs)</h2>
+            <p>To czasowniki opisujące <b>stan</b>, a nie czynność: uczucia, myśli, zmysły, posiadanie. Bardzo często pojawiają się w Present Simple.</p>
+            <div class="tip">⚠️ Czasowniki statyczne <b>NIGDY</b> nie występują z końcówką <b>„-ing”</b>! Powiemy „I like it”, nigdy „I am liking it”.</div>
+            <p>Przykłady: <b>like</b> (lubić), <b>love</b> (kochać), <b>hate</b> (nienawidzić), <b>want</b> (chcieć), <b>need</b> (potrzebować), <b>know</b> (wiedzieć), <b>understand</b> (rozumieć), <b>believe</b> (wierzyć), <b>remember</b> (pamiętać), <b>think</b> (sądzić), <b>see</b> (widzieć), <b>hear</b> (słyszeć), <b>smell</b> (pachnieć), <b>taste</b> (smakować), <b>have</b> (mieć — posiadać), <b>own</b> (posiadać), <b>belong</b> (należeć), <b>seem</b> (wydawać się).</p>
+            <div class="example"><b>I understand</b> this. &nbsp;/&nbsp; <b>She loves</b> music. &nbsp;/&nbsp; <b>This bag belongs</b> to me.</div>
+
+            <h2>Zastosowania — stałość</h2>
+            <div class="example">✈️ Plan lotu: <b>The flight departs</b> from Gate 12.</div>
+            <div class="example">🚆 Rozkład jazdy: <b>The bus leaves</b> every thirty minutes.</div>
+            <div class="example">📅 Harmonogram: <b>The lesson finishes</b> at 3 pm.</div>
+            <div class="example">⚽ Komentarz sportowy: <b>Ronaldo shoots</b> and scores!</div>
+            <div class="example">📰 Nagłówek prasowy: <b>President signs</b> a new law.</div>
+            <div class="tip">📰 W <b>nagłówkach prasowych</b> używamy Present Simple, nawet gdy mowa o wydarzeniu z przeszłości — brzmi świeżo i dynamicznie. Nagłówki są poniekąd stałe i schematyczne — zmieniają się w nich głównie miejsca i osoby (często gwiazdy), których dotyczą.</div>
+        </div>
+
+        <!-- ĆWICZENIA -->
+        <div class="card">
+            <h1>📝 Ćwiczenia</h1>
+            <div class="progress" id="progress"></div>
+            <div id="content"></div>
+            <div class="feedback" id="feedback"></div>
+            <div class="explanation" id="explanation"></div>
+            <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Dalej →</button>
+        </div>
+
+    </div>
+
+    <script>
+        let questions = [];
+        let current = 0;
+        let score = 0;
+        let answered = false;
+
+        async function loadQuestions() {
+            const res = await fetch("/questions");
+            questions = await res.json();
+            showQuestion();
+        }
+
+        function showQuestion() {
+            answered = false;
+            const q = questions[current];
+            const content = document.getElementById("content");
+            const feedback = document.getElementById("feedback");
+            const explanation = document.getElementById("explanation");
+            const nextBtn = document.getElementById("nextBtn");
+
+            feedback.textContent = "";
+            feedback.className = "feedback";
+            explanation.style.display = "none";
+            explanation.textContent = "";
+            nextBtn.style.display = "none";
+
+            document.getElementById("progress").textContent =
+                `Pytanie ${current + 1} z ${questions.length}`;
+
+            let html = `<div class="question">${q.question}</div>`;
+
+            if (q.type === "quiz") {
+                q.options.forEach((opt, i) => {
+                    html += `<button class="option" onclick="submitAnswer(${i}, this)">${opt}</button>`;
+                });
+            } else if (q.type === "sentence") {
+                html += `<div class="hint">✍️ Wpisz całe zdanie po angielsku. Kropka i wielkość liter nie są sprawdzane.</div>`;
+                html += `<input type="text" id="gapInput" placeholder="Wpisz całe zdanie...">`;
+                html += `<button class="btn" onclick="submitGap()">Sprawdź</button>`;
+            } else if (q.type === "full") {
+                html += `<div class="hint">✍️ Wpisz całe przekształcone zdanie po angielsku. Kropka i wielkość liter nie są sprawdzane.</div>`;
+                html += `<input type="text" id="gapInput" placeholder="Wpisz całe zdanie...">`;
+                html += `<button class="btn" onclick="submitGap()">Sprawdź</button>`;
+            } else {
+                html += `<input type="text" id="gapInput" placeholder="Wpisz odpowiedź...">`;
+                html += `<button class="btn" onclick="submitGap()">Sprawdź</button>`;
+            }
+            content.innerHTML = html;
+        }
+
+        async function submitAnswer(index, btn) {
+            if (answered) return;
+            answered = true;
+            const q = questions[current];
+            const answer = q.options[index];
+            const res = await fetch("/check", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ id: q.id, answer })
+            });
+            const data = await res.json();
+            showFeedback(data, btn);
+        }
+
+        async function submitGap() {
+            if (answered) return;
+            const input = document.getElementById("gapInput");
+            if (!input.value.trim()) return;
+            answered = true;
+            const q = questions[current];
+            const res = await fetch("/check", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ id: q.id, answer: input.value })
+            });
+            const data = await res.json();
+            showFeedback(data, null);
+        }
+
+        function showFeedback(data, btn) {
+            const feedback = document.getElementById("feedback");
+            const explanation = document.getElementById("explanation");
+            const nextBtn = document.getElementById("nextBtn");
+
+            if (data.correct) {
+                score++;
+                feedback.textContent = "✅ Dobrze!";
+                feedback.className = "feedback ok";
+                if (btn) btn.classList.add("correct");
+            } else {
+                feedback.textContent = `❌ Poprawnie: ${data.correct_answer}`;
+                feedback.className = "feedback no";
+                if (btn) btn.classList.add("wrong");
+            }
+
+            if (data.explanation) {
+                explanation.textContent = "💡 " + data.explanation;
+                explanation.style.display = "block";
+            }
+            nextBtn.style.display = "block";
+        }
+
+        function nextQuestion() {
+            current++;
+            if (current < questions.length) {
+                showQuestion();
+            } else {
+                showFinal();
+            }
+        }
+
+        function showFinal() {
+            document.getElementById("progress").textContent = "";
+            document.getElementById("feedback").textContent = "";
+            document.getElementById("explanation").style.display = "none";
+            document.getElementById("nextBtn").style.display = "none";
+            document.getElementById("content").innerHTML = `
+                <div class="final">
+                    <p>Twój wynik:</p>
+                    <div class="score">${score}/${questions.length}</div>
+                    <button class="btn" onclick="restart()">Jeszcze raz</button>
+                </div>`;
+        }
+
+        function restart() {
+            current = 0;
+            score = 0;
+            showQuestion();
+        }
+
+        loadQuestions();
+    </script>
+</body>
+</html>
