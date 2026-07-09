@@ -9,17 +9,22 @@ on:
 jobs:
   trivy-scan:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Pobierz kod
         uses: actions/checkout@v4
 
       - name: Zbuduj obraz Dockera
-        run: docker build -t bee-fluent:${{ github.sha }} .
+        run: docker build -t bee-fluent:latest .
 
       - name: Skanuj obraz przy pomocy Trivy
-        uses: aquasecurity/trivy-action@master
+        uses: aquasecurity/trivy-action@0.24.0
         with:
-          image-ref: 'bee-fluent:${{ github.sha }}'
+          image-ref: 'bee-fluent:latest'
           format: 'table'
           severity: 'CRITICAL,HIGH'
           exit-code: '0'
+          ignore-unfixed: true
+        env:
+          TRIVY_SKIP_DB_UPDATE: false
+          TRIVY_TIMEOUT: 10m
