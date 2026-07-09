@@ -1,0 +1,25 @@
+name: Skan bezpieczeństwa (Trivy)
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  trivy-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pobierz kod
+        uses: actions/checkout@v4
+
+      - name: Zbuduj obraz Dockera
+        run: docker build -t bee-fluent:${{ github.sha }} .
+
+      - name: Skanuj obraz przy pomocy Trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'bee-fluent:${{ github.sha }}'
+          format: 'table'
+          severity: 'CRITICAL,HIGH'
+          exit-code: '0'
