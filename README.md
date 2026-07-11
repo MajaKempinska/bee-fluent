@@ -1,5 +1,8 @@
 # 🐝 Bee Fluent — platforma do nauki gramatyki angielskiej
 
+![Build and deploy](https://github.com/MajaKempinska/bee-fluent/actions/workflows/main_bfwithmaja.yml/badge.svg)
+![Security scan](https://github.com/MajaKempinska/bee-fluent/actions/workflows/trivy-security.yml/badge.svg)
+
 > © 2026 Maja Kempińska. Wszystkie prawa zastrzeżone.
 > Kod udostępniony wyłącznie do wglądu w celach rekrutacyjnych i prezentacyjnych.
 

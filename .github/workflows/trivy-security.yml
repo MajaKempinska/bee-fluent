@@ -1,0 +1,27 @@
+name: Skan bezpieczeństwa (Trivy)
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  trivy-scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Pobierz kod
+        uses: actions/checkout@v4
+
+      - name: Zbuduj obraz Dockera
+        run: docker build -t bee-fluent:latest .
+
+      - name: Skanuj obraz przy pomocy Trivy
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          image-ref: 'bee-fluent:latest'
+          format: 'table'
+          severity: 'CRITICAL,HIGH'
+          exit-code: '1'
+          ignore-unfixed: true
