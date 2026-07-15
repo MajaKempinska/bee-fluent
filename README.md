@@ -11,8 +11,8 @@
 Interaktywna aplikacja webowa do nauki angielskich czasów gramatycznych — z teorią,
 ćwiczeniami sprawdzanymi w czasie rzeczywistym i wyjaśnieniami po każdej odpowiedzi.
 Zbudowana jako realne narzędzie edukacyjne dla [Bee Fluent with Maja](https://bfwithmaja.com),
-z pełnym pipeline'em DevSecOps: od konteneryzacji, przez testy i skan bezpieczeństwa,
-po wdrożenie w chmurze zarządzane kodem.
+z pełnym pipeline'em DevSecOps: od konteneryzacji, przez testy, skan bezpieczeństwa
+i monitoring, po wdrożenie w chmurze zarządzane kodem.
 
 ## ✨ Funkcje aplikacji
 
@@ -28,12 +28,13 @@ po wdrożenie w chmurze zarządzane kodem.
 |---------|-------------|
 | **Backend** | Python, Flask, Gunicorn |
 | **Frontend** | HTML, CSS, JavaScript (vanilla) |
-| **Konteneryzacja** | Docker |
+| **Konteneryzacja** | Docker, Docker Compose |
 | **Testy** | pytest |
 | **CI/CD** | GitHub Actions |
 | **Bezpieczeństwo** | Trivy (skan podatności) |
 | **Chmura** | Microsoft Azure (App Service) |
 | **Infrastructure as Code** | Terraform |
+| **Monitoring** | Prometheus, Grafana |
 
 ## 🔄 Pipeline DevSecOps
 
@@ -67,6 +68,29 @@ terraform apply   # utworzenie infrastruktury
 **Rozdzielenie odpowiedzialności:** Terraform zarządza infrastrukturą, a osobny pipeline CI/CD
 wdraża na nią kod aplikacji — zgodnie z dobrymi praktykami DevOps.
 
+## 📊 Monitoring (Prometheus + Grafana)
+
+Aplikacja jest instrumentowana metrykami Prometheusa (endpoint `/metrics`).
+Pełny stack monitoringu uruchamiany jest przez Docker Compose — jednym poleceniem
+startują trzy usługi: aplikacja, Prometheus (zbieranie metryk) i Grafana (wizualizacja).
+
+```bash
+docker compose up
+```
+
+- **Aplikacja** — `http://localhost:5001`
+- **Prometheus** — `http://localhost:9090`
+- **Grafana** — `http://localhost:3000`
+
+Dashboard w Grafanie pokazuje kluczowe metryki HTTP: liczbę żądań na sekundę
+oraz czas odpowiedzi (95. percentyl) w podziale na endpointy i kody statusu.
+
+### Żądania na sekundę
+![Żądania na sekundę](docs/monitoring-requests.png)
+
+### Czas odpowiedzi (95 percentyl)
+![Czas odpowiedzi](docs/monitoring-latency.png)
+
 ## 🚀 Uruchomienie lokalne
 
 ```bash
@@ -96,20 +120,25 @@ pytest -v
 ```
 
 ## 📁 Struktura projektu
-## 📁 Struktura projektu
+
+```
 bee-fluent/
-├── app.py                      # Backend Flask — logika i API ćwiczeń
+├── app.py                      # Backend Flask — logika, API ćwiczeń, metryki
 ├── test_app.py                 # Testy automatyczne (pytest)
 ├── requirements.txt            # Zależności Pythona
 ├── Dockerfile                  # Definicja obrazu kontenera
+├── docker-compose.yml          # Stack: aplikacja + Prometheus + Grafana
+├── prometheus.yml              # Konfiguracja zbierania metryk
 ├── templates/                  # Szablony HTML
 ├── static/                     # Zasoby statyczne
+├── docs/                       # Zrzuty ekranu (monitoring)
 ├── terraform/
 │   └── main.tf                 # Infrastructure as Code (Azure)
 └── .github/workflows/
-├── main_bfwithmaja.yml     # CI/CD: testy + wdrożenie
-├── trivy-security.yml      # Skan bezpieczeństwa
-└── deploy-terraform-app.yml # Wdrożenie na infrastrukturę z Terraform
+    ├── main_bfwithmaja.yml     # CI/CD: testy + wdrożenie
+    ├── trivy-security.yml      # Skan bezpieczeństwa
+    └── deploy-terraform-app.yml # Wdrożenie na infrastrukturę z Terraform
+```
 
 ## 🗺️ Zrealizowane etapy
 
@@ -120,8 +149,8 @@ bee-fluent/
 - [x] Wdrożenie w chmurze (Azure App Service)
 - [x] Skan bezpieczeństwa w pipeline (Trivy)
 - [x] Infrastructure as Code (Terraform)
+- [x] Monitoring (Prometheus + Grafana)
 - [ ] Baza danych na pytania
-- [ ] Monitoring (Application Insights)
 - [ ] Kolejne czasy gramatyczne
 
 ## 📜 Prawa autorskie
