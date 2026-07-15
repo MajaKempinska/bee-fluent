@@ -1,7 +1,8 @@
 from flask import Flask, request, jsonify, render_template
 import re
-
+from prometheus_flask_exporter import PrometheusMetrics 
 app = Flask(__name__)
+metrics = PrometheusMetrics(app)
 
 # =========================================================
 #  PRESENT SIMPLE
