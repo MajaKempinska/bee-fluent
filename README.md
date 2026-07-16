@@ -12,7 +12,7 @@ Interaktywna aplikacja webowa do nauki angielskich czasów gramatycznych — z t
 ćwiczeniami sprawdzanymi w czasie rzeczywistym i wyjaśnieniami po każdej odpowiedzi.
 Zbudowana jako realne narzędzie edukacyjne dla [Bee Fluent with Maja](https://bfwithmaja.com),
 z pełnym pipeline'em DevSecOps: od konteneryzacji, przez testy, skan bezpieczeństwa
-i monitoring, po wdrożenie w chmurze zarządzane kodem.
+i monitoring, po wdrożenie w chmurze zarządzane kodem, z danymi w chmurowej bazie PostgreSQL.
 
 ## ✨ Funkcje aplikacji
 
@@ -21,6 +21,7 @@ i monitoring, po wdrożenie w chmurze zarządzane kodem.
 - **Sprawdzanie po stronie serwera** — poprawne odpowiedzi nie są widoczne w kodzie strony
 - **Wyjaśnienia po każdej odpowiedzi** — nauka na błędach, nie tylko ocena
 - **Elastyczne dopasowanie odpowiedzi** — akceptuje formy skrócone i pełne (`doesn't` / `does not`)
+- **Pytania w bazie danych** — treść oddzielona od kodu, wczytywana z chmurowej bazy PostgreSQL
 
 ## 🛠️ Stack technologiczny
 
@@ -28,6 +29,7 @@ i monitoring, po wdrożenie w chmurze zarządzane kodem.
 |---------|-------------|
 | **Backend** | Python, Flask, Gunicorn |
 | **Frontend** | HTML, CSS, JavaScript (vanilla) |
+| **Baza danych** | PostgreSQL (Neon) |
 | **Konteneryzacja** | Docker, Docker Compose |
 | **Testy** | pytest |
 | **CI/CD** | GitHub Actions |
@@ -46,6 +48,19 @@ Każdy push do gałęzi `main` uruchamia zautomatyzowany proces:
 4. **Wdrożenie na Azure App Service** — automatyczne, bez ręcznych kroków
 
 Bramki jakości i bezpieczeństwa zapewniają, że zepsuty lub niebezpieczny kod nie trafi na produkcję.
+
+## 🗄️ Baza danych (PostgreSQL / Neon)
+
+Pytania są przechowywane w chmurowej bazie PostgreSQL (Neon), a nie w kodzie —
+dzięki czemu treść jest oddzielona od logiki aplikacji i może być zmieniana bez
+modyfikowania kodu. Aplikacja wczytuje pytania z bazy przy starcie.
+
+- **`seed.py`** — skrypt seedujący: tworzy tabelę i wgrywa pytania (idempotentnie, z parametryzowanymi zapytaniami przeciw SQL injection)
+- **Connection string** przechowywany jako zmienna środowiskowa (`.env` lokalnie, sekret w CI/CD i Azure) — nigdy w repozytorium
+
+```bash
+python seed.py   # jednorazowe wgranie pytań do bazy
+```
 
 ## 🏗️ Infrastructure as Code (Terraform)
 
@@ -105,6 +120,7 @@ python app.py
 ```
 
 Aplikacja dostępna pod `http://localhost:5001`.
+Wymaga zmiennej `DATABASE_URL` (connection string do PostgreSQL) w pliku `.env`.
 
 ### Uruchomienie w kontenerze
 
@@ -124,6 +140,7 @@ pytest -v
 ```
 bee-fluent/
 ├── app.py                      # Backend Flask — logika, API ćwiczeń, metryki
+├── seed.py                     # Skrypt seedujący bazę danych
 ├── test_app.py                 # Testy automatyczne (pytest)
 ├── requirements.txt            # Zależności Pythona
 ├── Dockerfile                  # Definicja obrazu kontenera
@@ -150,7 +167,7 @@ bee-fluent/
 - [x] Skan bezpieczeństwa w pipeline (Trivy)
 - [x] Infrastructure as Code (Terraform)
 - [x] Monitoring (Prometheus + Grafana)
-- [ ] Baza danych na pytania
+- [x] Baza danych na pytania (PostgreSQL / Neon)
 - [ ] Kolejne czasy gramatyczne
 
 ## 📜 Prawa autorskie
